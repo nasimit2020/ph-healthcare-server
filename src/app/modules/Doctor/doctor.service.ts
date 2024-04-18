@@ -11,12 +11,12 @@ const getAllDoctor = async (filters: TDoctorFilterRequest, options: TPaginationO
 
     const andConditions: Prisma.DoctorWhereInput[] = []
 
-    if (filters.searchTerm) {
+    if (searchTerm) {
         andConditions.push(
             {
                 OR: doctorSearchAbleFields.map(field => ({
                     [field]: {
-                        contains: params.searchTerm,
+                        contains: filters.searchTerm,
                         mode: 'insensitive'
                     }
                 }))
@@ -86,7 +86,7 @@ const getAllDoctor = async (filters: TDoctorFilterRequest, options: TPaginationO
     };
 };
 
-const getByIdFromDB = async (id: string): Promise<Admin | null> => {
+const getByIdFromDB = async (id: string): Promise<Doctor | null> => {
     const result = await prisma.doctor.findUniqueOrThrow({
         where: {
             id,
