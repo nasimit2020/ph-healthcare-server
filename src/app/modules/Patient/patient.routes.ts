@@ -24,16 +24,16 @@ router.patch(
     PatientController.updateIntoDB
 );
 
-// router.delete(
-//     '/:id',
-//     auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
-//     DoctorController.deleteFromDB
-// );
+router.delete(
+    '/:id',
+    // auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
+    PatientController.deleteFromDB
+);
 
-// router.delete(
-//     '/soft/:id',
-//     auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
-//     DoctorController.softDeleteFromDB
-// );
+router.delete(
+    '/soft/:id',
+    auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
+    PatientController.softDeleteFromDB
+);
 
 export const PatientRoutes = router;
