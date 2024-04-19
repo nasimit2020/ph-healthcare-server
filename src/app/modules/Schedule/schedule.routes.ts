@@ -12,15 +12,23 @@ router.post(
     ScheduleController.insertIntoDB
 );
 
-// router.get(
-//     '/',
-//     SpecialtiesController.getAllSpecialties
-// );
+router.get(
+    '/',
+    auth(UserRole.DOCTOR),
+    ScheduleController.getAllFromDB
+);
 
-// router.delete(
-//     '/:id',
-//     SpecialtiesController.deleteSpecialties
-// );
+router.get(
+    '/:id',
+    auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR),
+    ScheduleController.getByIdFromDB
+);
+
+router.delete(
+    '/:id',
+    auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
+    ScheduleController.deleteFromDB
+);
 
 
 export const ScheduleRoutes = router;
