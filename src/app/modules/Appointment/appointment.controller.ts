@@ -35,19 +35,22 @@ const getMyAppointment = catchAsync(async (req: Request & { user?: TAuthUser }, 
     })
 });
 
-// const deleteSpecialties = catchAsync(async (req, res) => {
-//     const { id } = req.params;
-//     const result = await SpecialtiesService.deleteSpecialtiesFromDB(id);
+const changeAppointmentStatus = catchAsync(async (req: Request & { user?: TAuthUser }, res: Response) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    const user = req.user;
+    const result = await AppointmentService.changeAppointmentStatus(id, status, user as TAuthUser,);
 
-//     sendResponse(res, {
-//         statusCode: httpStatus.OK,
-//         success: true,
-//         message: "Specialties Delete successfully!",
-//         data: result
-//     })
-// });
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Appointment status changed successfully!",
+        data: result
+    })
+});
 
 export const AppointmentController = {
     createAppointment,
-    getMyAppointment
+    getMyAppointment,
+    changeAppointmentStatus
 }
