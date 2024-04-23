@@ -210,8 +210,6 @@ const cancelUnpaidAppointments = async () => {
             });
         }
 
-        console.log("update");
-
 
     });
 
